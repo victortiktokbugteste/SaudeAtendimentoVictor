@@ -1,0 +1,4 @@
+GITHUB: https://github.com/victortiktokbugteste/SaudeAtendimentoVictor.git
+
+PARA USAR A BASE DE DADOS DO PROJETO, por favor me envia o endereço IP pra eu autorizar na azure.
+E-mail: vitorgabrielprogrammer@gmail.com

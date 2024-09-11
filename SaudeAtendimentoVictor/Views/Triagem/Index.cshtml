@@ -1,0 +1,126 @@
+﻿@{
+    ViewData["Title"] = "Triagem";
+}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/swiper/swiper-bundle.min.css">
+
+<div class="container pt-5" ng-app="myApp" ng-controller="triagemController">
+    <div class="spinerBackground">
+        <div class="spinerStyle" id="loading-bar-container">
+
+        </div>
+    </div>
+    <div id="popupContainer">
+
+    </div>
+
+    <div>
+        <h2>A Triagem é deletada caso o paciente seja deletado.</h2>
+    </div>
+
+    <div>
+        <div class="form-row">
+            <div class="col-auto ml-auto">
+                <button type="button" class="btn btn-primary" ng-click="adicionarTriagem()">Cadastrar</button>
+            </div>
+        </div>
+    </div><br /><br />
+
+
+    <div class="row" ng-show="list.triagens == null || list.triagens.length == 0">
+        <div class="col-sm-12">
+            <h3>Nenhuma triagem feita ainda.</h3>
+        </div>
+    </div>
+
+    <div class="table-responsive" ng-show="list.triagens != null && list.triagens.length > 0">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Atendimento</th>
+                    <th>Sintomas</th>
+                    <th>Pressão Arterial</th>
+                    <th>Peso</th>
+                    <th>Altura</th>
+                    <th>Especialidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="triagem in list.triagens">
+                    <td>{{ triagem.atendimento.numeroSequencial }}</td>
+                    <td>{{ triagem.sintomas }}</td>
+                    <td>{{ triagem.pressaoArterial }}</td>
+                    <td>{{ triagem.peso }} KG</td>
+                    <td>{{ triagem.altura }} CM</td>
+                    <td>{{ triagem.especialidade.nome }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Cadastro de Triagem</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Escolha o atendimento (n° sequencial)</label>
+                            <select ng-model="entity.atendimentoID" ng-options="atendimento.id as atendimento.numeroSequencial for atendimento in list.atendimentos">
+                                <option value="">Selecione uma opção</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Sintomas</label>
+                            <textarea class="form-control" ng-model="entity.sintomas"
+                                      placeholder="Descreva os sintomas"></textarea>
+
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Pressão Arterial</label>
+                            <input type="text" class="form-control" ng-model="entity.pressaoArterial">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Peso</label>
+                            <input type="text" class="form-control" ng-model="entity.peso">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Altura</label>
+                            <input type="text" class="form-control" ng-model="entity.altura">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Escolha a especidalidade</label>
+                            <select ng-model="entity.especialidadeID" ng-options="especialidade.id as especialidade.nome for especialidade in list.especialidades">
+                                <option value="">Selecione uma opção</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" ng-click="save_click()">Salvar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="closeModal()">Fechar</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="lib/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/js/main.js"></script>

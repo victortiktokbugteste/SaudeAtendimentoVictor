@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Início";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/swiper/swiper-bundle.min.css">
+
+<body>
+    <div class="spinerBackground">
+        <div class="spinerStyle" id="loading-bar-container">
+
+        </div>
+    </div>
+    <div id="popupContainer">
+
+    </div>
+    <div ng-app="myApp" ng-controller="HomeController">
+        <section class="section_main">
+            <div class="container position-relative">
+                <div class="banner-desk">
+                    <h1>ATENDIMENTO SAÚDE v1.0 by VICTOR GABRIEL</h1>
+                    <p>Faça seus agendamentos e chame seu paciente.</p>
+                </div>
+            </div>
+        </section>
+        <section id="filtragem" style="padding:0px !important">
+            <div class="container">
+                <div class="content-filter">
+                    <div class="filter-services" data-toggle="collapse" data-target="#collapseExample"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        <h3>Selecione a opção </h3>
+                    </div>
+                    <div class="collapse show" id="collapseExample">
+                        <div class="swiper container-categorias">
+                            <div class="header-catergorias">
+                                <h3></h3>
+                            </div>
+                            <div class="contegorias swiper-wrapper" ng-model="filter.Category">
+                                <label class="categoria swiper-slide" ng-repeat="category in list.categories"
+                                    ng-value="category.id" ng-class="{'active': filter.Category.id == category.id}">
+                                    <img ng-show="category.icon != null && category.icon != ''"
+                                        ng-src="{{category.icon}}" height="25" style="text-align:right;">
+                                    <span>{{category.name}}</span>
+                                    <input type="radio" ng-model="filter.Category"
+                                        ng-change="changeCategory();EntrarNaTela();" ng-value="category">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+
+<script src="lib/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/js/main.js"></script>
+

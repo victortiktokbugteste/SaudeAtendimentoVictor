@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "Atendimento";
+}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/swiper/swiper-bundle.min.css">
+
+<div class="container pt-5" ng-app="myApp" ng-controller="atendimentoController">
+    <div class="spinerBackground">
+        <div class="spinerStyle" id="loading-bar-container">
+
+        </div>
+    </div>
+    <div id="popupContainer">
+
+    </div>
+
+    <div>
+        <h2>O atendimento é deletado caso o paciente seja deletado.</h2>
+    </div>
+
+    <div>
+        <div class="form-row">
+            <div class="col-auto ml-auto">
+                <button type="button" class="btn btn-primary" ng-click="adicionarAtendimento()">Novo Atendimento</button>
+            </div>
+        </div>
+    </div><br /><br />
+
+
+    <div class="row" ng-show="list.atendimentos == null || list.atendimentos.length == 0">
+        <div class="col-sm-12">
+            <h3>Nenhum atendimento feito ainda.</h3>
+        </div>
+    </div>
+
+    <div class="table-responsive" ng-show="list.atendimentos != null && list.atendimentos.length > 0">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Número Sequencial</th>
+                    <th>Paciente</th>
+                    <th>Horário de Chegada</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-style="pintarLinha(atendimento)" ng-repeat="atendimento in list.atendimentos">
+                    <td>{{ atendimento.numeroSequencial }}</td>
+                    <td>{{ atendimento.paciente.nome }}</td>
+                    <td>{{ atendimento.dataHoraChegada | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                    <td>{{ atendimento.status.nome }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Registrar Atendimento</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Escolha o paciente</label>
+                            <select ng-model="entity.pacienteID" ng-options="paciente.id as paciente.nome for paciente in list.pacientes">
+                                <option value="">Selecione uma opção</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Escolha o status</label>
+                            <select ng-model="entity.statusID" ng-options="status.id as status.nome for status in list.status">
+                                <option value="">Selecione uma opção</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" ng-click="save_click()">Salvar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="closeModal()">Fechar</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="lib/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/js/main.js"></script>
